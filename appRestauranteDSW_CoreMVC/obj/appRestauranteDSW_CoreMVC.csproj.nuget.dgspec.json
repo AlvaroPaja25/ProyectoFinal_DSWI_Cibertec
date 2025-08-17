@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_CoreMVC\\appRestauranteDSW_CoreMVC.csproj": {}
+    "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_CoreMVC\\appRestauranteDSW_CoreMVC.csproj": {}
   },
   "projects": {
-    "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_CoreMVC\\appRestauranteDSW_CoreMVC.csproj": {
+    "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_CoreMVC\\appRestauranteDSW_CoreMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_CoreMVC\\appRestauranteDSW_CoreMVC.csproj",
+        "projectUniqueName": "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_CoreMVC\\appRestauranteDSW_CoreMVC.csproj",
         "projectName": "appRestauranteDSW_CoreMVC",
-        "projectPath": "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_CoreMVC\\appRestauranteDSW_CoreMVC.csproj",
+        "projectPath": "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_CoreMVC\\appRestauranteDSW_CoreMVC.csproj",
         "packagesPath": "C:\\Users\\CYBOR\\.nuget\\packages\\",
-        "outputPath": "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_CoreMVC\\obj\\",
+        "outputPath": "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_CoreMVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

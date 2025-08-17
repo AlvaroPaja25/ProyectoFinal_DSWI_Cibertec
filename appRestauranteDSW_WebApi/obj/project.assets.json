@@ -4935,11 +4935,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_WebApi\\appRestauranteDSW_WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_WebApi\\appRestauranteDSW_WebApi.csproj",
       "projectName": "appRestauranteDSW_WebApi",
-      "projectPath": "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_WebApi\\appRestauranteDSW_WebApi.csproj",
+      "projectPath": "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_WebApi\\appRestauranteDSW_WebApi.csproj",
       "packagesPath": "C:\\Users\\CYBOR\\.nuget\\packages\\",
-      "outputPath": "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_WebApi\\obj\\",
+      "outputPath": "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

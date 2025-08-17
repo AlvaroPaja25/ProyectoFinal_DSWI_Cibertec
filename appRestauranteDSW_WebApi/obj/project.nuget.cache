@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+nOwe2Hl5e4=",
+  "dgSpecHash": "wGKPulhmqLE=",
   "success": true,
-  "projectFilePath": "D:\\Repo_DServiciosWeb\\appRestauranteDSW\\appRestauranteDSW_WebApi\\appRestauranteDSW_WebApi.csproj",
+  "projectFilePath": "C:\\Users\\CYBOR\\Source\\Repos\\ProyectoFinal_DSWI_Cibertec\\appRestauranteDSW_WebApi\\appRestauranteDSW_WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CYBOR\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\CYBOR\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
