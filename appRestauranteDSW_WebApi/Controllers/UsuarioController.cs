@@ -2,7 +2,7 @@
 
 namespace appRestauranteDSW_WebApi.Controllers
 {
-    public class ClienteController : Controller
+    public class UsuarioController : Controller
     {
         public IActionResult Index()
         {
