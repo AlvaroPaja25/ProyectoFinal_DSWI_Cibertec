@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "appRestauranteDSW_CoreMVC/1.0.0": {
+        "runtime": {
+          "appRestauranteDSW_CoreMVC.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "appRestauranteDSW_CoreMVC/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
