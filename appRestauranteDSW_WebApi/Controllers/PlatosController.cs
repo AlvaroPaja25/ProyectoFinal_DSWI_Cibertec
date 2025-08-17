@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace appRestauranteDSW_WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] //Hola
     [Authorize] // requiere JWT
     public class PlatosController : ControllerBase
     {
