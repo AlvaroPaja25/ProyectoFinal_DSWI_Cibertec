@@ -21,6 +21,15 @@ public partial class usuario
     [Unicode(false)]
     public string? correo { get; set; }
 
+    public bool? verificado { get; set; }
+
+    [StringLength(255)]
+    [Unicode(false)]
+    public string? token_verificacion { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? fecha_token { get; set; }
+
     [InverseProperty("usuario")]
     public virtual ICollection<empleado> empleado { get; set; } = new List<empleado>();
 }

@@ -19,5 +19,23 @@ namespace appRestauranteDSW_WebApi.Controllers
             if (res == null) return Unauthorized(new { message = "Credenciales inválidas" });
             return Ok(res);
         }
+
+        //Registro y Verificacion de Usuario por Correo
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        {
+            var res = await _auth.RegisterAsync(request);
+            return Ok(res);
+        }
+
+        [HttpGet("verify")]
+        public async Task<IActionResult> Verify([FromQuery] string token)
+        {
+            var success = await _auth.VerifyEmailAsync(token);
+            if (!success) return BadRequest(new { message = "Token inválido o expirado" });
+            return Ok(new { message = "Cuenta verificada con éxito" });
+        }
+
     }
 }

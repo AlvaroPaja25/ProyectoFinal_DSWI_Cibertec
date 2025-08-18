@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using appRestauranteDSW_WebApi.Data.Entities;
-using appRestauranteDSW_WebApi.Services; // namespace del DbContext
+//using appRestauranteDSW_WebApi.Data.Entities;
+using appRestauranteDSW_WebApi.Services;
+using appRestauranteDSW_WebApi.Data.Entities; // namespace del DbContext
 
 var builder = WebApplication.CreateBuilder(args);
 
-// DbContext
+//DbContext
 builder.Services.AddDbContext<RestauranteContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -52,6 +53,7 @@ builder.Services.AddAuthorization();
 // Servicios de negocio propios
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<EmailService>();
 
 var app = builder.Build();
 

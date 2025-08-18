@@ -11,7 +11,7 @@ public partial class plato
     [Key]
     [StringLength(255)]
     [Unicode(false)]
-    public string id { get; set; } = null!;
+    public string id { get; set; } = Guid.NewGuid().ToString();
 
     [StringLength(255)]
     [Unicode(false)]
