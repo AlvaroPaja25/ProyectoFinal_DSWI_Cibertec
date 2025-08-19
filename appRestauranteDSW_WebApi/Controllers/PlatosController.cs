@@ -7,7 +7,7 @@ namespace appRestauranteDSW_WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize] // requiere JWT
+    //[Authorize] // requiere JWT
     public class PlatosController : ControllerBase
     {
         private readonly RestauranteContext _ctx;
@@ -65,31 +65,31 @@ namespace appRestauranteDSW_WebApi.Controllers
 
 
         // PUT: api/platos/{id}
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, [FromBody] plato plato)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(new { message = "Datos inválidos", errors = ModelState });
+[HttpPut("{id}")]
+public async Task<IActionResult> Update(string id, [FromBody] plato plato)
+{
+    if (!ModelState.IsValid)
+        return BadRequest(new { message = "Datos inválidos", errors = ModelState });
 
-            // Busca el plato en la base de datos usando el ID de la URI
-            var existingPlato = await _ctx.plato.FindAsync(id);
-            if (existingPlato == null)
-                return NotFound(new { message = $"No se encontró el plato con id {id}" });
+    // Busca el plato en la base de datos usando el ID de la URI
+    var existingPlato = await _ctx.plato.FindAsync(id);
+    if (existingPlato == null)
+        return NotFound(new { message = $"No se encontró el plato con id {id}" });
 
-            // Validar que no exista otro plato con el mismo nombre
-            if (await _ctx.plato.AnyAsync(p => p.nombre == plato.nombre && p.id != id))
-                return BadRequest(new { message = "Ya existe un plato con este nombre" });
+    // Validar que no exista otro plato con el mismo nombre
+    if (await _ctx.plato.AnyAsync(p => p.nombre == plato.nombre && p.id != id))
+        return BadRequest(new { message = "Ya existe un plato con este nombre" });
 
-            // Actualiza los campos del plato existente
-            existingPlato.nombre = plato.nombre;
-            existingPlato.precio_plato = plato.precio_plato;
-            existingPlato.imagen = plato.imagen;
-            existingPlato.categoria_plato_id = plato.categoria_plato_id;
+    // Actualiza los campos del plato existente
+    existingPlato.nombre = plato.nombre;
+    existingPlato.precio_plato = plato.precio_plato;
+    existingPlato.imagen = plato.imagen;
+    existingPlato.categoria_plato_id = plato.categoria_plato_id;
 
-            await _ctx.SaveChangesAsync();
+    await _ctx.SaveChangesAsync();
 
-            return Ok(new { message = "Plato actualizado correctamente", data = existingPlato });
-        }
+    return Ok(new { message = "Plato actualizado correctamente", data = existingPlato });
+}
 
 
         // DELETE: api/platos/5
