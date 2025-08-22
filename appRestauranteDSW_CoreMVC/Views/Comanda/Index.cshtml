@@ -1,0 +1,26 @@
+﻿@model IEnumerable<appRestauranteDSW_CoreMVC.Models.ComandaResponse>
+<h2>Listado de Comandas</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Mesa</th>
+            <th>Fecha</th>
+            <th>Precio Total</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Mesa</td>
+                <td>@item.FechaEmision</td>
+                <td>@item.PrecioTotal</td>
+                <td>@item.Estado</td>
+            </tr>
+        }
+    </tbody>
+</table>

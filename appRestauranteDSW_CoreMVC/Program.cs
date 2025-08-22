@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Registrar IHttpClientFactory
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<appRestauranteDSW_CoreMVC.Models.ComandaApiService>();
 
 // Habilitar Session
 builder.Services.AddDistributedMemoryCache();
