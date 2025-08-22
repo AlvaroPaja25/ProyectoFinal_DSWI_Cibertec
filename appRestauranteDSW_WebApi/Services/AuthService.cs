@@ -72,7 +72,11 @@ namespace appRestauranteDSW_WebApi.Services
 
             await _email.SendVerificationEmail(usuario.correo, token);
 
-            return new RegisterResponse { Message = "Registro exitoso, revisa tu correo para verificar la cuenta" };
+            return new RegisterResponse
+            {
+                Message = "Registro exitoso, revisa tu correo para verificar la cuenta",
+                Id = usuario.id   //  aquí devolvemos el id para usarlo en el registro de empleados
+            };
         }
 
         public async Task<bool> VerifyEmailAsync(string token)

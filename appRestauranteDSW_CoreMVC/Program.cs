@@ -12,6 +12,18 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddAuthentication("MyCookieAuth")
+    .AddCookie("MyCookieAuth", options =>
+    {
+        options.LoginPath = "/Login/Index"; // Página a la que se redirige si no está logueado
+        options.AccessDeniedPath = "/Login/AccessDenied"; // Opcional
+    });
+
+builder.Services.AddAuthorization();
+
+
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -23,6 +35,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

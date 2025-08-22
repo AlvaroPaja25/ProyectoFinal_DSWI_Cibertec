@@ -4,11 +4,26 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Usuarios</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<!-- Barra de búsqueda -->
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="filtro" class="form-control" placeholder="Buscar por código o correo..." value="@Context.Request.Query["filtro"]" />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
+
+<!-- Mensajes de acción -->
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -27,33 +42,32 @@
             <th>
                 @Html.DisplayNameFor(model => model.verificado)
             </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.contrasena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.correo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.verificado)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+            <tr>
+                <td>@item.id</td>
+                <td>@item.codigo</td>
+                <td>@item.contrasena</td>
+                <td>@item.correo</td>
+                <td>
+                    @(item.verificado == true ? "Activo" : "Desactivado")
+                </td>
+                <td>
+                    @if (item.verificado==true)
+                    {
+                        <form asp-action="Desactivar" asp-route-id="@item.id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-warning btn-sm">Desactivar</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Desactivado</span>
+                    }
+                </td>
+            </tr>
 }
     </tbody>
 </table>

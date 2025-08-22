@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 using System.Text;
 
 public class LoginController : Controller
@@ -37,16 +40,40 @@ public class LoginController : Controller
             var json = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<LoginResponse>(json);
 
-            // Guardar token y rol en sesión
+            // Crear claims
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, result.Usuario),
+        new Claim(ClaimTypes.Role, result.Rol)
+    };
+
+            var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
+
+            // Iniciar sesión con cookie
+            await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity));
+
+            // Opcional: mantener datos en session
             HttpContext.Session.SetString("JWToken", result.Token);
-            HttpContext.Session.SetString("Rol", result.Rol);
-            HttpContext.Session.SetString("Usuario", result.Usuario);
 
             return RedirectToAction("Index", "Home");
         }
 
+
         ViewBag.Error = "Credenciales inválidas";
         return View();
+    }
+
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        // Borra la cookie de autenticación
+        await HttpContext.SignOutAsync("MyCookieAuth");
+
+        // Opcional: limpiar la sesión
+        HttpContext.Session.Clear();
+
+        // Redirigir al login
+        return RedirectToAction("Index", "Login");
     }
 }
 

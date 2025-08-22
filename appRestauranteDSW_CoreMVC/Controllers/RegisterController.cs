@@ -49,4 +49,5 @@ public class RegisterController : Controller
 public class RegisterResponse
 {
     public string Message { get; set; }
+    public int Id { get; set; }
 }
