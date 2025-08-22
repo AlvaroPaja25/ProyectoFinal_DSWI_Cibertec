@@ -3,3 +3,5 @@
 
 # Ignorar todas las carpetas bin en cualquier subcarpeta
 /appRestauranteDSW_WebApi/obj
+
+/appRestauranteDSW_CoreMVC/obj
