@@ -1,7 +1,12 @@
 # Visual Studio
 .vs/
 
-# Ignorar todas las carpetas bin en cualquier subcarpeta
-/appRestauranteDSW_WebApi/obj
+# Ignorar carpetas de compilación
+appRestauranteDSW_WebApi/bin/
+appRestauranteDSW_WebApi/obj/
+appRestauranteDSW_CoreMVC/bin/
+appRestauranteDSW_CoreMVC/obj/
 
-/appRestauranteDSW_CoreMVC/obj
+# Reglas globales para cualquier proyecto .NET
+bin/
+obj/
