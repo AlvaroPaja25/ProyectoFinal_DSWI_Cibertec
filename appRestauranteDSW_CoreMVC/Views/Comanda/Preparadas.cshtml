@@ -1,0 +1,35 @@
+﻿@model IEnumerable<appRestauranteDSW_CoreMVC.Models.Comanda>
+
+@{
+    ViewData["Title"] = "Comandas Preparadas";
+}
+
+<h2 class="mb-4">💵 Comandas Preparadas</h2>
+
+<div class="row">
+    @foreach (var comanda in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Comanda #@comanda.Id</h5>
+                    <p class="card-text">
+                        Mesa: @comanda.MesaId <br />
+                        Asientos: @comanda.CantidadAsientos <br />
+                        Total: <strong>S/ @((comanda.PrecioTotal ?? 0).ToString("0.00"))</strong> <br />
+                        Estado: <span class="badge bg-success">Preparado</span>
+                    </p>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-controller="Factura"
+                           asp-action="Nuevo"
+                           asp-route-comandaId="@comanda.Id"
+                           class="btn btn-primary btn-sm">
+                            🧾 Facturar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

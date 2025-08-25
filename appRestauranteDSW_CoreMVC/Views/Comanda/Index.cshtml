@@ -1,0 +1,39 @@
+﻿@model IEnumerable<appRestauranteDSW_CoreMVC.Models.Mesas>
+
+@{
+    ViewData["Title"] = "Mesas Disponibles";
+}
+
+<h2 class="mb-4">Seleccionar Mesa</h2>
+
+<div class="row">
+    @foreach (var mesa in Model)
+    {
+        var color = mesa.estado == "Disponible" ? "bg-success" : "bg-danger";
+        var clickable = mesa.estado == "Disponible";
+
+        <div class="col-md-3 mb-3">
+            <div class="card text-white @color shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Mesa @mesa.id</h5>
+                    <p class="card-text">
+                        Asientos: @mesa.cantidad_asientos <br />
+                        Estado: @mesa.estado
+                    </p>
+
+                    @if (clickable)
+                    {
+                        <a class="btn btn-light btn-modern"
+                           href="@Url.Action("Create", "Comanda", new { mesaId = mesa.id })">
+                            <i class="bi bi-plus-circle"></i> Crear Comanda
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="badge bg-dark">Ocupada</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

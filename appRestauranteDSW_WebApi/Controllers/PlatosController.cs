@@ -23,6 +23,7 @@ namespace appRestauranteDSW_WebApi.Controllers
             return Ok(platos);
         }
 
+
         // GET: api/platos/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
@@ -105,5 +106,33 @@ public async Task<IActionResult> Update(string id, [FromBody] plato plato)
 
             return Ok(new { message = "Plato eliminado correctamente" });
         }
+
+        // GET: api/platos/categoria/{categoriaId}
+        [HttpGet("categoria/{categoriaId}")]
+        public async Task<IActionResult> GetByCategoria(string categoriaId)
+        {
+            var platos = await _ctx.plato
+                .Include(p => p.categoria_plato)
+                .Where(p => p.categoria_plato_id == categoriaId)
+                .ToListAsync();
+
+            if (!platos.Any())
+                return NotFound(new { message = $"No se encontraron platos para la categoría {categoriaId}" });
+
+            return Ok(platos);
+        }
+
+        // GET api/platos/search?nombre=xxx
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery] string nombre)
+        {
+            var platos = await _ctx.plato
+                .Where(p => p.nombre.Contains(nombre))
+                .Select(p => new { p.id, p.nombre, p.precio_plato })
+                .ToListAsync();
+            return Ok(platos);
+        }
+
+
     }
 }

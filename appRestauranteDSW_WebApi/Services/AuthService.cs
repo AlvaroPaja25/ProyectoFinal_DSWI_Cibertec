@@ -47,6 +47,7 @@ namespace appRestauranteDSW_WebApi.Services
                 Token = token,
                 Usuario = user.correo!,
                 Rol = rol,
+                EmpleadoId = empleado?.id ?? 0,
                 Expira = exp
             };
         }

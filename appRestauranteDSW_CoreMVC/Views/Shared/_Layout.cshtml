@@ -27,7 +27,7 @@
         <hr class="text-white" />
         <ul class="nav nav-pills flex-column mb-auto">
             <li><a class="nav-link" asp-controller="Home" asp-action="Index">🏠 Inicio</a></li>
-            <li><a class="nav-link" asp-controller="CategoriaPlatos" asp-action="Index">📂 Categorías de Platos</a></li>
+            <li><a class="nav-link" asp-controller="Categorias" asp-action="Index">📂 Categorías de Platos</a></li>
             <li><a class="nav-link" asp-controller="Platos" asp-action="Index">🥘 Platos</a></li>
             <li><a class="nav-link" asp-controller="Clientes" asp-action="Index">👤 Clientes</a></li>
             <li><a class="nav-link" asp-controller="Comprobantes" asp-action="Index">🧾 Comprobantes</a></li>
@@ -35,6 +35,16 @@
             <li><a class="nav-link" asp-controller="Mesas" asp-action="Index">🍴 Mesas</a></li>
             <li><a class="nav-link" asp-controller="MetodosPago" asp-action="Index">💳 Métodos de Pago</a></li>
             <li><a class="nav-link" asp-controller="Usuarios" asp-action="Index">🔑 Usuarios</a></li>
+            <li><a class="nav-link" asp-controller="Comanda" asp-action="Index">🔑 Generar Comanda</a></li>
+            <li>
+                <a class="nav-link" asp-controller="Establecimiento" asp-action="Edit" asp-route-id="EST01">🔑 Establecimiento</a>
+            </li>
+            <li>
+                <a class="nav-link" asp-controller="Comanda" asp-action="Pendientes" >COMANDAS PENDIENTES</a>
+            </li>
+            <li>
+                <a class="nav-link" asp-controller="Comanda" asp-action="Preparadas">Facturar Comandas</a>
+            </li>
         </ul>
     </div>
 

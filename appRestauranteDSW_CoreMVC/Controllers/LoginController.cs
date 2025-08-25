@@ -44,7 +44,8 @@ public class LoginController : Controller
             var claims = new List<Claim>
     {
         new Claim(ClaimTypes.Name, result.Usuario),
-        new Claim(ClaimTypes.Role, result.Rol)
+        new Claim(ClaimTypes.Role, result.Rol),
+        new Claim("EmpleadoId", result.EmpleadoId.ToString())
     };
 
             var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
@@ -53,6 +54,7 @@ public class LoginController : Controller
             await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity));
 
             // Opcional: mantener datos en session
+            HttpContext.Session.SetInt32("EmpleadoId", result.EmpleadoId);
             HttpContext.Session.SetString("JWToken", result.Token);
 
             return RedirectToAction("Index", "Home");
@@ -82,5 +84,6 @@ public class LoginResponse
     public string Token { get; set; }
     public string Usuario { get; set; }
     public string Rol { get; set; }
+    public int EmpleadoId { get; set; }
     public DateTime Expira { get; set; }
 }
