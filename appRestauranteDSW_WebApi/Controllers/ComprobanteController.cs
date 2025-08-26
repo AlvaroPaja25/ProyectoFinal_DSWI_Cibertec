@@ -18,14 +18,24 @@ namespace appRestauranteDSW_WebApi.Controllers
         public async Task<IActionResult> GetAll()
         {
             var comprobantes = await _ctx.comprobante
-                .Include(c => c.cliente)
-                .Include(c => c.empleado)
-                .Include(c => c.tipo_comprobante)
-                .Include(c => c.comanda)
+                .Select(c => new
+                {
+                    c.id,
+                    c.fecha_emision,
+                    c.cliente_id,
+                    c.empleado_id,
+                    c.tipo_comprobante_id,
+                    c.comanda_id,
+                    c.igv_total,
+                    c.precio_total_pedido,
+                    c.sub_total,
+
+                })
                 .ToListAsync();
 
             return Ok(comprobantes);
         }
+
 
         // GET: api/comprobantes/5
         [HttpGet("{id}")]

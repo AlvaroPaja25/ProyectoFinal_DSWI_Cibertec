@@ -4,15 +4,6 @@
     ViewData["Title"] = "Editar Establecimiento";
 }
 
-<!-- Mensajes de acción -->
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">@TempData["Success"]</div>
-}
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">@TempData["Error"]</div>
-}
 
 <div class="container mt-4">
     <h1 class="mb-4">Editar Establecimiento</h1>
@@ -57,9 +48,6 @@
                     <button type="submit" class="btn btn-primary me-2">
                         <i class="bi bi-save-fill"></i> Guardar
                     </button>
-                    <a asp-action="Index" class="btn btn-secondary">
-                        <i class="bi bi-arrow-left"></i> Volver al listado
-                    </a>
                 </div>
             </form>
         </div>

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Comandas Pendientes";
 }
 
-<h2 class="mb-4">🍽️ Comandas Pendientes</h2>
+<h2 class="mb-4"> Comandas Pendientes</h2>
 
 @if (Model == null || !Model.Any())
 {
@@ -18,32 +18,37 @@ else
         @foreach (var comanda in Model)
         {
             <div class="col-md-4 mb-3">
-                <div class="card shadow border-0">
+                <div class="card shadow border-0 text-center">
                     <div class="card-body">
-                        <h5 class="card-title">Comanda #@comanda.Id</h5>
+                        <!-- Ícono grande -->
+                        <div class="mb-3">
+                            <i class="bi bi-journal-text text-primary" style="font-size: 3rem;"></i>
+                        </div>
+
+                        <h5 class="card-title fw-bold">Comanda #@comanda.Id</h5>
                         <p class="card-text">
-                            Mesa: @comanda.MesaId <br />
-                            Asientos: @comanda.CantidadAsientos <br />
-                            Estado: <span class="badge bg-warning">Pendiente</span>
+                            <span class="d-block"><strong>Mesa:</strong> @comanda.MesaId</span>
+                            <span class="d-block"><strong>Asientos:</strong> @comanda.CantidadAsientos</span>
+                            <span class="d-block">Estado: <span class="badge bg-warning text-dark">Pendiente</span></span>
                         </p>
 
-                        <div class="d-flex justify-content-between mb-2">
-                            <a class="btn btn-info btn-sm"
+                        <div class="d-flex justify-content-between mt-3">
+                            <a class="btn btn-outline-primary btn-sm"
                                asp-action="Detalles"
                                asp-controller="Comanda"
                                asp-route-id="@comanda.Id">
-                                👀 Ver Detalles
+                                Ver Detalles
                             </a>
 
                             <form asp-action="MarcarPreparado" asp-controller="Comanda" method="post" class="d-inline">
                                 <input type="hidden" name="id" value="@comanda.Id" />
                                 <button type="submit" class="btn btn-success btn-sm">
-                                    ✅ Preparado
+                                    Preparado
                                 </button>
                             </form>
                         </div>
 
-                        <div id="detalles-comanda-@comanda.Id" class="detalles-comanda"></div>
+                        <div id="detalles-comanda-@comanda.Id" class="detalles-comanda mt-3"></div>
                     </div>
                 </div>
             </div>

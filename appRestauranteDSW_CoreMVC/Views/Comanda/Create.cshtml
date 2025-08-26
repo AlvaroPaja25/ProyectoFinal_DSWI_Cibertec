@@ -14,11 +14,11 @@
             <form asp-action="Create" method="post" id="comandaForm">
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label asp-for="MesaId" class="form-label"></label>
+                        <label asp-for="MesaId" class="form-label">Mesa</label>
                         <input asp-for="MesaId" class="form-control" name="MesaId" readonly />
                     </div>
                     <div class="col-md-6">
-                        <label asp-for="EmpleadoId" class="form-label"></label>
+                        <label asp-for="EmpleadoId" class="form-label">Empleado</label>
                         <input asp-for="EmpleadoId" class="form-control" name="EmpleadoId" readonly />
                     </div>
                 </div>
@@ -54,9 +54,11 @@
                     </div>
                     <div class="col-md-1 mt-2">
                         <button type="button" class="btn btn-primary w-100" id="btnAgregarPlato">
-                            <i class="bi bi-plus-circle">+ Agregar</i>
+                            <i class="bi bi-plus-circle me-1"></i> Agregar
                         </button>
                     </div>
+
+
                 </div>
 
                 <div class="mb-3 text-end">

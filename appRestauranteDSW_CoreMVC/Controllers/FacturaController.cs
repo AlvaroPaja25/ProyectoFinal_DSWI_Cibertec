@@ -10,6 +10,20 @@ public class FacturaController : Controller
     private readonly string _baseUrlTipoComprobante = "https://localhost:7296/api/TipoComprobante";
     private readonly string _baseUrlComprobante = "https://localhost:7296/api/Comprobantes";
 
+    public async Task<IActionResult> Index()
+    {
+        var comprobantes = new List<Comprobante>();
+
+        HttpResponseMessage resp = await _httpClient.GetAsync(_baseUrlComprobante);
+        if (resp.IsSuccessStatusCode)
+        {
+            string apiResponse = await resp.Content.ReadAsStringAsync();
+            comprobantes = JsonConvert.DeserializeObject<List<Comprobante>>(apiResponse);
+        }
+
+        return View(comprobantes);
+    }
+
     public FacturaController(IHttpClientFactory httpClientFactory)
     {
         _httpClient = httpClientFactory.CreateClient();

@@ -1,41 +1,39 @@
 ﻿@model IEnumerable<appRestauranteDSW_CoreMVC.Models.CategoriaPlato>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Categorías de Platos";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0"><i class="bi bi-folder2-open me-2"></i>Categorías de Platos</h2>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle me-1"></i> Nueva Categoría
+    </a>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<table class="table table-striped table-hover table-bordered align-middle shadow-sm">
+    <thead class="table-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.id)</th>
+            <th>@Html.DisplayNameFor(model => model.nombre)</th>
+            <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.id)</td>
+                <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-warning btn-sm me-1" title="Editar">
+                        <i class="bi bi-pencil-square fs-5"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-outline-danger btn-sm" title="Eliminar">
+                        <i class="bi bi-trash fs-5"></i>
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

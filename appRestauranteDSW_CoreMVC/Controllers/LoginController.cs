@@ -56,6 +56,7 @@ public class LoginController : Controller
             // Opcional: mantener datos en session
             HttpContext.Session.SetInt32("EmpleadoId", result.EmpleadoId);
             HttpContext.Session.SetString("JWToken", result.Token);
+            HttpContext.Session.SetString("EmpleadoRol", result.Rol);
 
             return RedirectToAction("Index", "Home");
         }
