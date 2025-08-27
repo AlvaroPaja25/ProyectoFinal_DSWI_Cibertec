@@ -41,7 +41,7 @@ GO
 -- Tabla: estado_comanda
 CREATE TABLE estado_comanda (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    estado VARCHAR(255),
+    estado VARCHAR(255)
 );
 GO
 
@@ -80,7 +80,7 @@ CREATE TABLE empleado (
 CREATE TABLE comanda (
     id INT IDENTITY(1,1) PRIMARY KEY,
     cantidad_asientos INT,
-    fecha_emision VARCHAR(255),
+    fecha_emision DATETIME DEFAULT GETDATE(),
     precio_total DECIMAL(10,2),
     empleado_id INT,
     estado_comanda_id INT,
@@ -136,7 +136,7 @@ CREATE TABLE tipo_comprobante (
 CREATE TABLE comprobante (
     id INT IDENTITY(1,1) PRIMARY KEY,
     descuento_total DECIMAL(10,2),
-    fecha_emision DATETIME,
+    fecha_emision DATETIME DEFAULT GETDATE(),
     igv_total DECIMAL(10,2),
     precio_total_pedido DECIMAL(10,2),
     sub_total DECIMAL(10,2),

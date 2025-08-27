@@ -1,0 +1,173 @@
+﻿@{
+    ViewData["Title"] = "Reportes";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">Reportes</h1>
+
+    <div class="card mb-3">
+        <div class="card-body d-flex flex-wrap gap-2 align-items-end">
+            <div>
+                <label class="form-label mb-0">Año</label>
+                <input id="anioInput" type="number" class="form-control" style="width:140px" value="@DateTime.Now.Year" />
+            </div>
+
+            <button id="btnPlatos" class="btn btn-primary">
+                <i class="bi bi-graph-up"></i> Platos más vendidos
+            </button>
+
+            <button id="btnEmpleados" class="btn btn-secondary">
+                <i class="bi bi-people"></i> Empleados top por comandas
+            </button>
+
+            <button id="btnIngresos" class="btn btn-success">
+                <i class="bi bi-cash-coin"></i> Ingresos e IGV por año
+            </button>
+        </div>
+    </div>
+
+    <!-- Secciones -->
+    <div id="secPlatos" class="card d-none">
+        <div class="card-header bg-primary text-white">Platos más vendidos</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered mb-0" id="tblPlatos">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Plato</th>
+                            <th>Categoría</th>
+                            <th>Cantidad Vendida</th>
+                        </tr>
+                    </thead>
+                    <tbody><!-- rows dinámicas --></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="secEmpleados" class="card d-none mt-3">
+        <div class="card-header bg-secondary text-white">Empleados top por comandas</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered mb-0" id="tblEmpleados">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Empleado</th>
+                            <th>Total Comandas</th>
+                            <th>Total Ventas</th>
+                        </tr>
+                    </thead>
+                    <tbody><!-- rows dinámicas --></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="secIngresos" class="card d-none mt-3">
+        <div class="card-header bg-success text-white">Ingresos e IGV por año</div>
+        <div class="card-body">
+            <div id="chart_ingresos" style="height:420px;"></div>
+            <small class="text-muted">Fuente: /api/Reportes/ingresos-por-anio</small>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Google Charts -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+    const showOnly = (id) => {
+        ['secPlatos', 'secEmpleados', 'secIngresos'].forEach(s => {
+            document.getElementById(s).classList.toggle('d-none', s !== id);
+        });
+    };
+
+    // 1) Platos más vendidos por año
+    async function loadPlatos() {
+        const year = document.getElementById('anioInput').value || new Date().getFullYear();
+        const res = await fetch(`/Reportes/PlatosMasVendidos?year=${year}`);
+        if (!res.ok) { alert('Error cargando platos'); return; }
+        const data = await res.json(); // [{platoId,platoNombre,categoria,cantidadVendida}, ...]
+        const tbody = document.querySelector('#tblPlatos tbody');
+        tbody.innerHTML = '';
+
+        data.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${r.platoNombre ?? ''}</td>
+                <td>${r.categoria ?? ''}</td>
+                <td class="text-end">${r.cantidadVendida ?? 0}</td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // 2) Empleados top por comandas
+    async function loadEmpleados() {
+        const res = await fetch('/Reportes/EmpleadosTopComandas');
+        if (!res.ok) { alert('Error cargando empleados'); return; }
+        const data = await res.json(); // [{empleadoId,empleado,totalComandas,totalVentas}, ...]
+        const tbody = document.querySelector('#tblEmpleados tbody');
+        tbody.innerHTML = '';
+
+        data.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${r.empleado ?? ''}</td>
+                <td class="text-end">${r.totalComandas ?? 0}</td>
+                <td class="text-end">${(r.totalVentas ?? 0).toLocaleString()}</td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // 3) Ingresos e IGV por año (Google Charts)
+    google.charts.load('current', { packages: ['corechart'] });
+
+    async function loadIngresosChart() {
+        const res = await fetch('/Reportes/IngresosPorAnio');
+        if (!res.ok) { alert('Error cargando ingresos'); return; }
+        const raw = await res.json();
+        // Formato del API: [["Año","Ingresos","IGV"], ["2023",123,45], ...]
+        const data = google.visualization.arrayToDataTable(raw);
+
+        const options = {
+            legend: { position: 'bottom' },
+            hAxis: { title: 'Año' },
+            vAxis: { title: 'Monto' }
+        };
+
+        const chart = new google.visualization.ColumnChart(document.getElementById('chart_ingresos'));
+        chart.draw(data, options);
+    }
+
+    // Eventos
+    document.getElementById('btnPlatos').addEventListener('click', async () => {
+        await loadPlatos();
+        showOnly('secPlatos');
+    });
+
+    document.getElementById('btnEmpleados').addEventListener('click', async () => {
+        await loadEmpleados();
+        showOnly('secEmpleados');
+    });
+
+    document.getElementById('btnIngresos').addEventListener('click', async () => {
+        google.charts.setOnLoadCallback(async () => {
+            await loadIngresosChart();
+            showOnly('secIngresos');
+        });
+        // Si ya está cargado, intenta dibujar de inmediato
+        if (google && google.visualization) {
+            await loadIngresosChart();
+            showOnly('secIngresos');
+        }
+    });
+
+    // Estado inicial
+    // Nada visible hasta que elijas un reporte
+</script>
